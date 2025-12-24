@@ -488,6 +488,17 @@ def hsidrive_palette():
             [255, 166, 0], [0, 204, 204]]
 
 
+def floodnet_classes():
+    """floodnet class names for external use."""
+    return [
+        'background', 'water', 'flood'
+    ]
+
+
+def floodnet_palette():
+    """floodnet palette for external use."""
+    return [[0, 0, 0], [0, 0, 128], [128, 0, 0]]
+
 dataset_aliases = {
     'cityscapes': ['cityscapes'],
     'ade': ['ade', 'ade20k'],
@@ -510,7 +521,8 @@ dataset_aliases = {
     'hsidrive': [
         'hsidrive', 'HSIDrive', 'HSI-Drive', 'hsidrive20', 'HSIDrive20',
         'HSI-Drive20'
-    ]
+    ],
+    'floodnet':['floodnet']
 }
 
 

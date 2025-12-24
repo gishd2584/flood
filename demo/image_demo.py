@@ -1,10 +1,8 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 from argparse import ArgumentParser
-
+import torch
 from mmengine.model import revert_sync_batchnorm
-
 from mmseg.apis import inference_model, init_model, show_result_pyplot
-
 
 def main():
     parser = ArgumentParser()
@@ -13,7 +11,7 @@ def main():
     parser.add_argument('checkpoint', help='Checkpoint file')
     parser.add_argument('--out-file', default=None, help='Path to output file')
     parser.add_argument(
-        '--device', default='cuda:0', help='Device used for inference')
+        '--device', help='Device used for inference')
     parser.add_argument(
         '--opacity',
         type=float,
@@ -28,10 +26,23 @@ def main():
         '--title', default='result', help='The image identifier.')
     args = parser.parse_args()
 
+    # Determine device
+    if args.device is None:
+        if torch.cuda.is_available():
+            args.device = 'cuda:0'
+        elif torch.backends.mps.is_available():
+            args.device = 'mps'
+        else:
+            args.device = 'cpu'
+    
+    print(f'Using device: {args.device}')
+
     # build the model from a config file and a checkpoint file
     model = init_model(args.config, args.checkpoint, device=args.device)
-    if args.device == 'cpu':
+    
+    if args.device != 'cuda:0':
         model = revert_sync_batchnorm(model)
+
     # test a single image
     result = inference_model(model, args.img)
     # show the results
@@ -45,7 +56,6 @@ def main():
         draw_gt=False,
         show=False if args.out_file is not None else True,
         out_file=args.out_file)
-
 
 if __name__ == '__main__':
     main()
