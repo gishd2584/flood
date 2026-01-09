@@ -9,3 +9,7 @@ model = dict(data_preprocessor=data_preprocessor)
 test_dataloader = None
 test_cfg = None
 test_evaluator = None   
+
+
+  git config --global user.email "951622481@qq.com"
+  git config --global user.name "gishd2584"
