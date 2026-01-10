@@ -11,6 +11,7 @@ param_scheduler = [
         end=320000,
         by_epoch=False)
 ]
+
 # training schedule for 320k
 # 修改为按 Epoch 训练
 train_cfg = dict(

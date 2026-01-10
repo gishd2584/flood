@@ -1,5 +1,5 @@
 # model settings
-norm_cfg = dict(type='SyncBN', requires_grad=True)
+norm_cfg = dict(type='BN', requires_grad=True)
 data_preprocessor = dict(
     type='SegDataPreProcessor',
     mean=[123.675, 116.28, 103.53],
@@ -28,7 +28,7 @@ model = dict(
         num_convs=1,
         concat_input=False,
         dropout_ratio=0.1,
-        num_classes=19,
+        num_classes=10,
         norm_cfg=norm_cfg,
         align_corners=False,
         loss_decode=dict(
@@ -39,7 +39,7 @@ model = dict(
             in_channels=16,
             channels=16,
             num_convs=2,
-            num_classes=19,
+            num_classes=10,
             in_index=1,
             norm_cfg=norm_cfg,
             concat_input=False,
@@ -51,7 +51,7 @@ model = dict(
             in_channels=32,
             channels=64,
             num_convs=2,
-            num_classes=19,
+            num_classes=10,
             in_index=2,
             norm_cfg=norm_cfg,
             concat_input=False,
@@ -63,7 +63,7 @@ model = dict(
             in_channels=64,
             channels=256,
             num_convs=2,
-            num_classes=19,
+            num_classes=10,
             in_index=3,
             norm_cfg=norm_cfg,
             concat_input=False,
@@ -75,7 +75,7 @@ model = dict(
             in_channels=128,
             channels=1024,
             num_convs=2,
-            num_classes=19,
+            num_classes=10,
             in_index=4,
             norm_cfg=norm_cfg,
             concat_input=False,
@@ -84,5 +84,5 @@ model = dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
     ],
     # model training and testing settings
-    train_cfg=dict(),
+
     test_cfg=dict(mode='whole'))

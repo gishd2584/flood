@@ -499,6 +499,27 @@ def floodnet_palette():
     """floodnet palette for external use."""
     return [[0, 0, 0], [0, 0, 128], [128, 0, 0]]
 
+def opsfloodnet_classes():
+    """opsfloodnet class names for external use."""
+    return [
+        'Background', 'Building-flooded', 'Building-non-flooded', 'Road-flooded', 'Road-non-flooded', 'Water', 'Tree', 'Vehicle', 'Pool', 'Grass'
+    ]
+
+
+def opsfloodnet_palette():
+    """opsfloodnet palette for external use."""
+    return [ [0, 0, 0],        # 0 Background - black
+            [0, 0, 128],      # 1 Building-flooded - dark blue
+            [128, 0, 0],      # 2 Building-non-flooded - dark red
+            [0, 0, 255],      # 3 Road-flooded - blue
+            [255, 0, 0],      # 4 Road-non-flooded - red
+            [0, 128, 255],    # 5 Water - light blue
+            [0, 128, 0],      # 6 Tree - green
+            [255, 255, 0],    # 7 Vehicle - yellow
+            [0, 255, 255],    # 8 Pool - cyan
+            [128, 255, 128],  # 9 Grass - light green
+            ]
+
 dataset_aliases = {
     'cityscapes': ['cityscapes'],
     'ade': ['ade', 'ade20k'],
@@ -522,7 +543,8 @@ dataset_aliases = {
         'hsidrive', 'HSIDrive', 'HSI-Drive', 'hsidrive20', 'HSIDrive20',
         'HSI-Drive20'
     ],
-    'floodnet':['floodnet']
+    'floodnet':['floodnet'],
+    'opsfloodnet':['opsfloodnet']
 }
 
 
