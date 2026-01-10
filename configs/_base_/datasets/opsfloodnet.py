@@ -48,8 +48,7 @@ test_pipeline = [
 # Dataloader 配置
 # -------------------------------------------------------------------------
 train_dataloader = dict(
-
-    batch_size=4,  # 根据你的显存调整，如果 OOM 就改成 2
+    batch_size=16,  # 根据你的显存调整，如果 OOM 就改成 2
     num_workers=4,
     drop_last=True,
     persistent_workers=True,
@@ -66,7 +65,7 @@ train_dataloader = dict(
 
 val_dataloader = dict(
     
-    batch_size=4, # 验证集通常 batch_size=1
+    batch_size=4, 
     num_workers=4,
     drop_last=True,
     persistent_workers=True,

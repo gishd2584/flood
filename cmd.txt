@@ -1,0 +1,7 @@
+
+
+
+CUDA_VISIBLE_DEVICES=0 \
+python tools/train.py \
+/root/flood/configs/bisenetv1/bisenetv1_fcn_4xb4-160k_opsfloodnet-512x512.py \
+--work-dir /root/autodl-tmp/workdirs/bisenetv1

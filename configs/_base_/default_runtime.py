@@ -11,5 +11,5 @@ log_processor = dict(by_epoch=True)
 log_level = 'INFO'
 load_from = None
 resume = False
-
+randomness = dict(seed=42)
 tta_model = dict(type='SegTTAModel')
