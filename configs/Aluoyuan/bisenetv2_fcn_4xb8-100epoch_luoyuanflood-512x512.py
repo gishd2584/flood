@@ -1,0 +1,17 @@
+_base_ = [
+    '../_base_/models/bisenetv2.py',
+    '../_base_/datasets/luoyuanflood.py',
+    '../_base_/default_runtime.py', '../_base_/schedules/epoch_100.py'
+]
+
+crop_size = (512, 512)
+data_preprocessor = dict(size=crop_size)
+model = dict(data_preprocessor=data_preprocessor)
+# param_scheduler = [
+#     dict(type='LinearLR', by_epoch=False, start_factor=0.1, begin=0, end=1000),
+# ]
+optimizer = dict(type='SGD', lr=0.05, momentum=0.9, weight_decay=0.0005)
+optim_wrapper = dict(type='OptimWrapper', optimizer=optimizer)
+
+
+

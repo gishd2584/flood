@@ -17,6 +17,7 @@ from .isaid import iSAIDDataset
 from .isprs import ISPRSDataset
 from .levir import LEVIRCDDataset
 from .lip import LIPDataset
+from .luoyuanflood import LuoYuanFlood
 from .loveda import LoveDADataset
 from .mapillary import MapillaryDataset_v1, MapillaryDataset_v2
 from .night_driving import NightDrivingDataset
@@ -63,5 +64,5 @@ __all__ = [
     'MapillaryDataset_v2', 'Albu', 'LEVIRCDDataset',
     'LoadMultipleRSImageFromFile', 'LoadSingleRSImageFromFile',
     'ConcatCDInput', 'BaseCDDataset', 'DSDLSegDataset', 'BDD100KDataset',
-    'NYUDataset', 'HSIDrive20Dataset','FloodNetDataset','OPSFloodNet'
+    'NYUDataset', 'HSIDrive20Dataset','FloodNetDataset','OPSFloodNet','LuoYuanFlood'
 ]

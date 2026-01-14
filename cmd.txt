@@ -3,5 +3,8 @@
 
 CUDA_VISIBLE_DEVICES=0 \
 python tools/train.py \
-/root/flood/configs/bisenetv1/bisenetv1_fcn_4xb4-160k_opsfloodnet-512x512.py \
---work-dir /root/autodl-tmp/workdirs/bisenetv1
+/root/flood/configs/Acenzx/pidnet-s_2xb8-100epoch_1024x1024-opsfloodnet-per.py \
+--work-dir /root/autodl-tmp/workdirs/1024x1024
+
+ python tools/train.py my_mode/swin-tiny-patch4-window7-in1k-pre_upernet
+_8xb2-160k_ade20k-512x512.py ./work_dirs/swin-tiny-patch4-window7-in1k-pre_upernet_8xb2-160k_ade20k-512x512/iter_101033.pth

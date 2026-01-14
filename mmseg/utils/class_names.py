@@ -499,6 +499,18 @@ def floodnet_palette():
     """floodnet palette for external use."""
     return [[0, 0, 0], [0, 0, 128], [128, 0, 0]]
 
+def luoyuanflood_classes():
+    """luoyuanflood class names for external use."""
+    return [
+        'background', 'water', 'flood'
+    ]
+
+
+def luoyuanflood_palette():
+    """luoyuanflood palette for external use."""
+    return [[0, 0, 0], [0, 0, 128], [128, 0, 0]]
+
+
 def opsfloodnet_classes():
     """opsfloodnet class names for external use."""
     return [
@@ -544,7 +556,8 @@ dataset_aliases = {
         'HSI-Drive20'
     ],
     'floodnet':['floodnet'],
-    'opsfloodnet':['opsfloodnet']
+    'opsfloodnet':['opsfloodnet'],
+    'luoyuanflood':['luoyuanflood']
 }
 
 

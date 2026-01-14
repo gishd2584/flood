@@ -20,7 +20,7 @@ train_cfg = dict(
     val_interval=5               # 每隔多少个 Epoch 验证一次
 )
 val_cfg = dict(type='ValLoop')
-
+test_cfg = dict(type='TestLoop')
 default_hooks = dict(
     timer=dict(type='IterTimerHook'),
     logger=dict(type='LoggerHook', interval=5, log_metric_by_epoch=True),

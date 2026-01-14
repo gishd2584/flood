@@ -1,5 +1,5 @@
-dataset_type = 'OPSFloodNet'
-data_root = 'data/opsfloodnet/'
+dataset_type = 'LuoYuanFlood'
+data_root = 'data/luoyuan/'
 
 
 # dataset settings
@@ -22,7 +22,7 @@ train_pipeline = [
     # 对于遥感/4K图，通常不建议直接 Resize 到很小，会丢失细节。
     # 这里设置 ratio_range 只是为了做多尺度增强 (0.5倍到2.0倍之间浮动)，
     # 保持 keep_ratio=True 以免变形。
-    dict(type='RandomResize', scale=(3840, 2160), ratio_range=(0.5, 2.0), keep_ratio=True),
+    dict(type='RandomResize', scale=(1024, 1024), ratio_range=(0.5, 2.0), keep_ratio=True),
     
     # 2. RandomCrop (核心):
     # 在大图上随机切出 crop_size 大小的块进行训练
@@ -37,7 +37,7 @@ train_pipeline = [
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     # 测试时，我们希望保留原分辨率，或者只做轻微缩放
-    dict(type='Resize', scale=(3840, 2160), keep_ratio=True),
+    dict(type='Resize', scale=(512, 512), keep_ratio=True),
     # add loading annotation after ``Resize`` because ground truth
     # does not need to do resize data transform
     dict(type='LoadAnnotations'),
@@ -89,8 +89,8 @@ test_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         data_prefix=dict(
-            img_path='images/test', 
-            seg_map_path='labels/test'
+            img_path='images/val', 
+            seg_map_path='labels/val'
         ),
         pipeline=test_pipeline))
 
