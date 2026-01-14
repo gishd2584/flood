@@ -1,11 +1,10 @@
 _base_ = [
-    '../_base_/datasets/opsfloodnet.py',
+    '../_base_/datasets/louyuanflood.py',
     '../_base_/default_runtime.py','../_base_/schedules/epoch_100.py'
 ]
 
-crop_size = (1024, 1024)
+crop_size = (512, 512)
 
-checkpoint_file = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/pidnet/pidnet-s_imagenet1k_20230306-715e6273.pth'  # noqa
 
 data_preprocessor = dict(
     type='SegDataPreProcessor',
@@ -29,7 +28,7 @@ model = dict(
         align_corners=False,
         norm_cfg=norm_cfg,
         act_cfg=dict(type='ReLU', inplace=True),
-        init_cfg=dict(type='Pretrained', checkpoint=checkpoint_file)),
+        ),
     decode_head=dict(
         type='PIDHead',
         in_channels=128,
@@ -37,7 +36,7 @@ model = dict(
         num_classes=10,
         norm_cfg=norm_cfg,
         act_cfg=dict(type='ReLU', inplace=True),
-        init_cfg=dict(type='Pretrained', checkpoint=checkpoint_file),
+        
         align_corners=True,
         loss_decode=[
             dict(

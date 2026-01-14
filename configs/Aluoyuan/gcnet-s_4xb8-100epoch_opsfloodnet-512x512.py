@@ -1,5 +1,5 @@
 _base_ = [
-    '../_base_/datasets/opsfloodnet.py',
+    '../_base_/datasets/luoyuanflood.py',
     '../_base_/default_runtime.py','../_base_/schedules/epoch_100.py'
 ]
 
@@ -32,7 +32,7 @@ model = dict(
         in_channels=32 * 4,
         channels=64,
         dropout_ratio=0.,
-        num_classes=19,
+        num_classes=3,
         align_corners=False,
         norm_cfg=dict(type='BN', requires_grad=True),
         act_cfg=dict(type='ReLU', inplace=True),

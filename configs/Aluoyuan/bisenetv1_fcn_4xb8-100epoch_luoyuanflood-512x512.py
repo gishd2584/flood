@@ -1,6 +1,6 @@
 _base_ = [
 
-    '../_base_/datasets/opsfloodnet.py',
+    '../_base_/datasets/luoyuanflood.py',
     '../_base_/default_runtime.py', '../_base_/schedules/epoch_100.py'
 ]
 
@@ -55,7 +55,7 @@ model = dict(
         num_convs=1,
         concat_input=False,
         dropout_ratio=0.1,
-        num_classes=10,
+        num_classes=3,
         norm_cfg=norm_cfg,
         align_corners=False,
         loss_decode=dict(
@@ -66,7 +66,7 @@ model = dict(
             in_channels=128,
             channels=64,
             num_convs=1,
-            num_classes=10,
+            num_classes=3,
             in_index=1,
             norm_cfg=norm_cfg,
             concat_input=False,
@@ -92,23 +92,6 @@ model = dict(
 
 
 
-
-
-
-
-
-
-
-
-
-
 optimizer = dict(type='SGD', lr=0.05, momentum=0.9, weight_decay=0.0005)
 optim_wrapper = dict(type='OptimWrapper', optimizer=optimizer)
-train_dataloader = dict(batch_size=16, num_workers=4)
-val_dataloader = dict(batch_size=1, num_workers=4)
-test_dataloader = val_dataloader
-
-test_dataloader = None
-test_cfg = None
-test_evaluator = None
 
