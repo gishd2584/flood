@@ -3,8 +3,29 @@
 
 CUDA_VISIBLE_DEVICES=0 \
 python tools/train.py \
-/root/flood/configs/Acenzx/pidnet-s_2xb8-100epoch_1024x1024-opsfloodnet-per.py \
---work-dir /root/autodl-tmp/workdirs/1024x1024
+/root/flood/configs/Aluoyuan/stdc+convnextv2+simAM.py \
+--work-dir /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2+simAM
 
  python tools/train.py my_mode/swin-tiny-patch4-window7-in1k-pre_upernet
 _8xb2-160k_ade20k-512x512.py ./work_dirs/swin-tiny-patch4-window7-in1k-pre_upernet_8xb2-160k_ade20k-512x512/iter_101033.pth
+
+
+python /root/flood/tools/analysis_tools/testfps.py \
+/root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2+simAM/stdc+convnextv2+simAM.py \
+/root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2+simAM/best_mIoU_epoch_95.pth \
+--log-file /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/my_benchmark.log \
+--img /root/flood/data/luoyuan/images/val --multi-img
+
+
+# 单图测试（纯推理速度）
+python fps_benchmark.py config.py model.pth --img demo.png
+
+# 多图测试（模拟真实场景，包含I/O开销）
+python fps_benchmark.py config.py model.pth --img ./test_images/ --multi-img
+
+
+python /root/flood/tools/analysis_tools/testfps.py \
+/root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/Stdc+convnextv2.py \
+/root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/best_mIoU_epoch_95.pth \
+--log-file /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/my_benchmark.log \
+--data-root /root/flood/data/luoyuan/
