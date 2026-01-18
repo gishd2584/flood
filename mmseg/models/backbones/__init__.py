@@ -36,6 +36,10 @@ from .stdc_dual_attention import (
     STDCNetWithDualAttention,
     STDCContextPathNetWithDualAttention,
 )
+from .stdc_with_simAM import (STDCNetAblation,
+    STDCContextPathNetAblation)
+
+from .stdclite import (STDCNet_MidNeXt_Lite,STDCContextPathNet_MidNeXt)
 __all__ = [
     'ResNet', 'ResNetV1c', 'ResNetV1d', 'ResNeXt', 'HRNet', 'FastSCNN',
     'ResNeSt', 'MobileNetV2', 'UNet', 'CGNet', 'MobileNetV3',
@@ -48,4 +52,8 @@ __all__ = [
     'ConvNeXtV2EnhancedBlock',
     'FeatureFusionModuleWithGRN', 'STDCNetWithDualAttention',
     'STDCContextPathNetWithDualAttention',
+    'STDCNetAblation',
+    'STDCContextPathNetAblation',
+    'STDCNet_MidNeXt_Lite',
+    'STDCContextPathNet_MidNeXt',
 ]

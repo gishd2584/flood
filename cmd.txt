@@ -3,17 +3,17 @@
 
 CUDA_VISIBLE_DEVICES=0 \
 python tools/train.py \
-/root/flood/configs/Aluoyuan/stdc+convnextv2+simAM.py \
---work-dir /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2+simAM
+/root/flood/configs/Aluoyuan/stdclite.py \
+--work-dir /root/autodl-fs/luoyuan/mystdclite
 
  python tools/train.py my_mode/swin-tiny-patch4-window7-in1k-pre_upernet
 _8xb2-160k_ade20k-512x512.py ./work_dirs/swin-tiny-patch4-window7-in1k-pre_upernet_8xb2-160k_ade20k-512x512/iter_101033.pth
 
 
 python /root/flood/tools/analysis_tools/testfps.py \
-/root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2+simAM/stdc+convnextv2+simAM.py \
-/root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2+simAM/best_mIoU_epoch_95.pth \
---log-file /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/my_benchmark.log \
+/root/autodl-fs/luoyuan/mystdclite/stdclite.py \
+/root/autodl-fs/luoyuan/mystdclite/best_mIoU_epoch_100.pth \
+--log-file /root/autodl-fs/luoyuan/mystdclite/my_benchmark.log \
 --img /root/flood/data/luoyuan/images/val --multi-img
 
 
