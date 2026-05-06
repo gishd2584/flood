@@ -1,16 +1,56 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from mmseg.apis import init_model
 from mmseg.models.backbones.gcnet import GCNet  # 新增导入
 
 import argparse
 import types
 
+# ----------------- 新增：解决 ONNX 不支持 AdaptiveAvgPool2d 和 SyncBatchNorm 的问题 -----------------
+def replace_syncbn(module):
+    """递归将 SyncBatchNorm 替换为普通的 BatchNorm2d"""
+    for name, child in module.named_children():
+        if isinstance(child, nn.SyncBatchNorm):
+            target_bn = nn.BatchNorm2d(child.num_features, child.eps, child.momentum, child.affine, child.track_running_stats)
+            target_bn.load_state_dict(child.state_dict())
+            target_bn = target_bn.to('cuda:0')
+            setattr(module, name, target_bn)
+        else:
+            replace_syncbn(child)
+
+def custom_adaptive_pool_forward(self, input):
+    """自定义 AdaptiveAvgPool2d 的前向传播，将其转换为 ONNX 支持的 AvgPool2d"""
+    output_size = self.output_size
+    if isinstance(output_size, int):
+        output_size = (output_size, output_size)
+        
+    if output_size[0] == 1 and output_size[1] == 1:
+        # 1x1 输出时，ONNX 支持 GlobalAveragePool
+        return F.adaptive_avg_pool2d(input, output_size)
+        
+    # 对于其他尺寸，计算等效的 AvgPool2d
+    h, w = input.shape[-2:]
+    stride_h = max(h // output_size[0], 1)
+    stride_w = max(w // output_size[1], 1)
+    kernel_h = h - (output_size[0] - 1) * stride_h
+    kernel_w = w - (output_size[1] - 1) * stride_w
+    
+    return F.avg_pool2d(input, kernel_size=(kernel_h, kernel_w), stride=(stride_h, stride_w))
+
+# 替换 PyTorch 的原生实现
+nn.AdaptiveAvgPool2d.forward = custom_adaptive_pool_forward
+# ------------------------------------------------------------------------------------
+
 def export_onnx(config_path, checkpoint_path, output_file):
     # 1. 初始化模型
     print("正在加载模型...")
     model = init_model(config_path, checkpoint_path, device='cuda:0')
     model.eval()
+    
+    # 解决 SyncBatchNorm 在导出 ONNX 时报错的问题
+    replace_syncbn(model)
+    
     # ✅ 修改1：如果是 GCNet，导出前必须先融合多分支结构
     if isinstance(model.backbone, GCNet):
         print("  检测到 GCNet，正在执行 switch_to_deploy()...")
