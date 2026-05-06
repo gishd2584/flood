@@ -118,3 +118,7 @@ mmseg/.mim
 
 # Pytorch
 *.pth
+*.onnx
+*.zip
+onnx_model/
+tools/vis/

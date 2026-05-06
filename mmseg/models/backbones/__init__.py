@@ -38,7 +38,10 @@ from .stdc_dual_attention import (
 )
 from .stdc_with_simAM import (STDCNetAblation,
     STDCContextPathNetAblation)
-
+from .stdc_midnext_ablation import (
+    STDCContextPathNet_MidNeXt_3x3,
+    STDCContextPathNet_MidNeXt_7x7
+)
 from .stdclite import (STDCNet_MidNeXt_Lite,STDCContextPathNet_MidNeXt)
 __all__ = [
     'ResNet', 'ResNetV1c', 'ResNetV1d', 'ResNeXt', 'HRNet', 'FastSCNN',
@@ -56,4 +59,6 @@ __all__ = [
     'STDCContextPathNetAblation',
     'STDCNet_MidNeXt_Lite',
     'STDCContextPathNet_MidNeXt',
+    'STDCContextPathNet_MidNeXt_3x3',
+    'STDCContextPathNet_MidNeXt_7x7'
 ]

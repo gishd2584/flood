@@ -3,8 +3,8 @@
 
 CUDA_VISIBLE_DEVICES=0 \
 python tools/train.py \
-/root/flood/configs/Aluoyuan/stdclite.py \
---work-dir /root/autodl-fs/luoyuan/mystdclite
+/root/flood/configs/Aopsfloodnet/ddrnet_23-slim_2xb6-100epcoh_opsfloodnet-512x512.py \
+--work-dir /root/autodl-fs/opsfloodnet/ddrnet_23_slim
 
  python tools/train.py my_mode/swin-tiny-patch4-window7-in1k-pre_upernet
 _8xb2-160k_ade20k-512x512.py ./work_dirs/swin-tiny-patch4-window7-in1k-pre_upernet_8xb2-160k_ade20k-512x512/iter_101033.pth
@@ -29,3 +29,28 @@ python /root/flood/tools/analysis_tools/testfps.py \
 /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/best_mIoU_epoch_95.pth \
 --log-file /root/autodl-tmp/workdirs/luoyuan/stdc+convnextv2/my_benchmark.log \
 --data-root /root/flood/data/luoyuan/
+
+
+python predict.py \
+    --config-dir /root/autodl-fs/luoyuan \
+    --work-dir /root/autodl-fs/luoyuan \
+    --input-dir /root/flood/data/luoyuan/images/val
+
+
+
+python collect_flood_results.py \
+    --work-dir /root/autodl-fs/luoyuan \
+    --label-dir /root/flood/data/luoyuan/labels/val \
+    --output-dir /root/autodl-fs/luoyuan/flood_results \
+    --original-dir /root/flood/data/luoyuan/images/val
+
+
+
+    opsfloodnet的测试
+
+    python run_flood_eval.py \
+    --work-dir  /root/autodl-tmp/workdirs/512x512 \
+    --img-dir   /root/flood/data/opsfloodnet/images/val \
+    --label-dir /root/flood/data/opsfloodnet/labels/val \
+    --output-dir /root/autodl-tmp/flood_eval_results \
+    --device cuda:0
