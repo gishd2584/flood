@@ -9,7 +9,7 @@ import types
 def export_onnx(config_path, checkpoint_path, output_file):
     # 1. 初始化模型
     print("正在加载模型...")
-    model = init_model(config_path, checkpoint_path, device='cpu')
+    model = init_model(config_path, checkpoint_path, device='cuda:0')
     model.eval()
     # ✅ 修改1：如果是 GCNet，导出前必须先融合多分支结构
     if isinstance(model.backbone, GCNet):
@@ -23,7 +23,7 @@ def export_onnx(config_path, checkpoint_path, output_file):
         print("  融合验证通过 ✓")
     # 2. 准备虚拟输入
     input_shape = (1, 3, 512, 512)
-    dummy_input = torch.randn(input_shape)
+    dummy_input = torch.randn(input_shape).cuda()
 
     # 3. 定义新的 forward 函数，只包含核心计算逻辑
     # 这样可以绕过 MMSeg 复杂的 data_sample 包装
@@ -102,9 +102,9 @@ if __name__ == '__main__':
     exList = [
         
        
-            ('/root/autodl-fs/luoyuan/ddrnet_23_slim/ddrnet_23-slim_2xb6-100epcoh_luoyuanflood-512x512.py',
-             '/root/autodl-fs/luoyuan/ddrnet_23_slim/best_mIoU_epoch_100.pth',
-             'ddrnet-23-slim.onnx'),
+            ('/root/autodl-fs/luoyuan/swin/swin-tiny-patch4-window7_upernet_8xb2-100epoch_luoyuanflood-512x512.py',
+             '/root/autodl-fs/luoyuan/swin/best_mIoU_epoch_65.pth',
+             'swin-tiny.onnx'),
          
     ]
     

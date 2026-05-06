@@ -3,8 +3,8 @@
 
 CUDA_VISIBLE_DEVICES=0 \
 python tools/train.py \
-/root/flood/configs/Aopsfloodnet/ddrnet_23-slim_2xb6-100epcoh_opsfloodnet-512x512.py \
---work-dir /root/autodl-fs/opsfloodnet/ddrnet_23_slim
+/root/flood/configs/Aluoyuan/segformer_mit-b0_8xb2-100epoch_luoyuanflood-512x512.py \
+--work-dir /root/autodl-tmp/workdirs/512x512/segformer_luoyuan
 
  python tools/train.py my_mode/swin-tiny-patch4-window7-in1k-pre_upernet
 _8xb2-160k_ade20k-512x512.py ./work_dirs/swin-tiny-patch4-window7-in1k-pre_upernet_8xb2-160k_ade20k-512x512/iter_101033.pth
