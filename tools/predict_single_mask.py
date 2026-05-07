@@ -11,15 +11,15 @@ import argparse
 import time
 
 # ==================== 调色板定义 ====================
-# 二分类数据集：0 为背景，1 为洪水
+# FloodNet数据集调色板
 PALETTE = [
-    [0, 0, 0],        # 0: Background - 黑色
-    [255, 255, 255],  # 1: Flood - 白色
-    [0, 0, 255],      # 2: (预留) - 红色
+    [0, 0, 0],        # Background - 黑色
+    [0, 0, 255],      # Water - 红色
+    [255, 255, 255],  # flood - 白色
 ]
 
 CLASS_NAMES = [
-    'Background', 'Flood', 'Other'
+    'Background', 'Water', 'flood'
 ]
 
 # 支持的图像格式
