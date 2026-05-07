@@ -54,3 +54,10 @@ python collect_flood_results.py \
     --label-dir /root/flood/data/opsfloodnet/labels/val \
     --output-dir /root/autodl-tmp/flood_eval_results \
     --device cuda:0
+
+单个模型推理输出遮罩
+python /root/flood/tools/predict_single_mask.py \
+    --config /root/autodl-fs/luoyuan/swin/swin-tiny-patch4-window7_upernet_8xb2-100epoch_luoyuanflood-512x512.py \
+    --checkpoint /root/autodl-fs/luoyuan/swin/best_mIoU_epoch_65.pth \
+    --input-dir /root/flood/data/luoyuan/images/val \
+    --output-dir /root/autodl-fs/luoyuan/mask_results_swin-tiny
